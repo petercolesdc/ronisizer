@@ -130,6 +130,28 @@ const transforms = [
 			fit: "cover",
 			progressive: true
 		}
+	},
+	
+	// Logos (Landscape)
+	{
+		src: "../Tests/11ty/assets/img/lg/*",
+		dist: "../Tests/11ty/assets/img/_resized/lg/50",
+		options: {
+			width: 268,
+			height: null,
+			fit: "cover",
+			toFormat: 'png'
+		}
+	},
+	{
+		src: "../Tests/11ty/assets/img/lg/*",
+		dist: "../Tests/11ty/assets/img/_resized/lg/100",
+		options: {
+			width: 535,
+			height: null,
+			fit: "cover",
+			toFormat: 'png'
+		}
 	}
 	
 ];
