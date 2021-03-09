@@ -2,14 +2,18 @@ const fs = require("fs");
 const glob = require("glob");
 const path = require("path");
 const sharp = require("sharp");
+const del = require('del');
+
+// Add path to images here
+const dir = "../Tests/11ty/assets"
 
 // specify transforms
 const transforms = [
 	
 	// Squares
 	{
-		src: "../Tests/11ty/assets/img/sq/*",
-		dist: "../Tests/11ty/assets/img/_resized/sq/25",
+		src: dir + "/img/sq/*",
+		dist: dir + "/img/_resized/sq/25",
 		options: {
 			width: 225,
 			height: 225,
@@ -18,8 +22,8 @@ const transforms = [
 		}
 	},
 	{
-		src: "../Tests/11ty/assets/img/sq/*",
-		dist: "../Tests/11ty/assets/img/_resized/sq/50",
+		src: dir + "/img/sq/*",
+		dist: dir + "/img/_resized/sq/50",
 		options: {
 			width: 450,
 			height: 450,
@@ -28,8 +32,8 @@ const transforms = [
 		}
 	},
 	{
-		src: "../Tests/11ty/assets/img/sq/*",
-		dist: "../Tests/11ty/assets/img/_resized/sq/75",
+		src:  dir + "/img/sq/*",
+		dist: dir + "/img/_resized/sq/75",
 		options: {
 			width: 675,
 			height: 675,
@@ -38,8 +42,8 @@ const transforms = [
 		}
 	},
 	{
-		src: "../Tests/11ty/assets/img/sq/*",
-		dist: "../Tests/11ty/assets/img/_resized/sq/100",
+		src:  dir + "/img/sq/*",
+		dist: dir + "/img/_resized/sq/100",
 		options: {
 			width: 900,
 			height: 900,
@@ -50,8 +54,8 @@ const transforms = [
 	
 	// Backgrounds
 	{
-		src: "../Tests/11ty/assets/img/bg/*",
-		dist: "../Tests/11ty/assets/img/_resized/bg/25",
+		src: dir + "/img/bg/*",
+		dist: dir + "/img/_resized/bg/25",
 		options: {
 			width: 600,
 			height: null,
@@ -60,8 +64,8 @@ const transforms = [
 		}
 	},
 	{
-		src: "../Tests/11ty/assets/img/bg/*",
-		dist: "../Tests/11ty/assets/img/_resized/bg/50",
+		src: dir + "/img/bg/*",
+		dist: dir + "/img/_resized/bg/50",
 		options: {
 			width: 1200,
 			height: null,
@@ -70,8 +74,8 @@ const transforms = [
 		}
 	},
 	{
-		src: "../Tests/11ty/assets/img/bg/*",
-		dist: "../Tests/11ty/assets/img/_resized/bg/75",
+		src: dir + "/img/bg/*",
+		dist: dir + "/img/_resized/bg/75",
 		options: {
 			width: 1800,
 			height: null,
@@ -80,8 +84,8 @@ const transforms = [
 		}
 	},
 	{
-		src: "../Tests/11ty/assets/img/bg/*",
-		dist: "../Tests/11ty/assets/img/_resized/bg/100",
+		src: dir + "/img/bg/*",
+		dist: dir + "/img/_resized/bg/100",
 		options: {
 			width: 2400,
 			height: null,
@@ -90,20 +94,10 @@ const transforms = [
 		}
 	},
 	
-	// Textures
+	// Articles
 	{
-		src: "../Tests/11ty/assets/tex/*",
-		dist: "../Tests/11ty/assets/tex/_resized/25",
-		options: {
-			width: 300,
-			height: null,
-			fit: "cover",
-			progressive: true
-		}
-	},
-	{
-		src: "../Tests/11ty/assets/tex/*",
-		dist: "../Tests/11ty/assets/tex/_resized/50",
+		src: dir + "/img/bl/*",
+		dist: dir + "/img/_resized/bl/25",
 		options: {
 			width: 600,
 			height: null,
@@ -112,20 +106,30 @@ const transforms = [
 		}
 	},
 	{
-		src: "../Tests/11ty/assets/tex/*",
-		dist: "../Tests/11ty/assets/tex/_resized/75",
+		src: dir + "/img/bl/*",
+		dist: dir + "/img/_resized/bl/50",
 		options: {
-			width: 900,
+			width: 1200,
 			height: null,
 			fit: "cover",
 			progressive: true
 		}
 	},
 	{
-		src: "../Tests/11ty/assets/tex/*",
-		dist: "../Tests/11ty/assets/tex/_resized/100",
+		src: dir + "/img/bl/*",
+		dist: dir + "/img/_resized/bl/75",
 		options: {
-			width: 1200,
+			width: 1800,
+			height: null,
+			fit: "cover",
+			progressive: true
+		}
+	},
+	{
+		src: dir + "/img/bl/*",
+		dist: dir + "/img/_resized/bl/100",
+		options: {
+			width: 2400,
 			height: null,
 			fit: "cover",
 			progressive: true
@@ -134,8 +138,8 @@ const transforms = [
 	
 	// Logos (Landscape)
 	{
-		src: "../Tests/11ty/assets/img/lg/*",
-		dist: "../Tests/11ty/assets/img/_resized/lg/50",
+		src: dir + "/img/lg/*",
+		dist: dir + "/img/_resized/lg/50",
 		options: {
 			width: 268,
 			height: null,
@@ -144,18 +148,68 @@ const transforms = [
 		}
 	},
 	{
-		src: "../Tests/11ty/assets/img/lg/*",
-		dist: "../Tests/11ty/assets/img/_resized/lg/100",
+		src: dir + "/img/lg/*",
+		dist: dir + "/img/_resized/lg/100",
 		options: {
 			width: 535,
 			height: null,
 			fit: "cover",
 			toFormat: 'png'
 		}
+	},
+	
+	// Textures
+	{
+		src: dir + "/tex/*",
+		dist: dir + "/tex/_resized/25",
+		options: {
+			width: 300,
+			height: null,
+			fit: "cover",
+			progressive: true
+		}
+	},
+	{
+		src: dir + "/tex/*",
+		dist: dir + "/tex/_resized/50",
+		options: {
+			width: 600,
+			height: null,
+			fit: "cover",
+			progressive: true
+		}
+	},
+	{
+		src: dir + "/tex/*",
+		dist: dir + "/tex/_resized/75",
+		options: {
+			width: 900,
+			height: null,
+			fit: "cover",
+			progressive: true
+		}
+	},
+	{
+		src: dir + "/tex/*",
+		dist: dir + "/tex/_resized/100",
+		options: {
+			width: 1200,
+			height: null,
+			fit: "cover",
+			progressive: true
+		}
 	}
 	
 ];
 
+function clean(cb) {
+	del([
+		'../Tests/11ty/assets/img/_resized/',
+		'../Tests/11ty/assets/tex/_resized/',
+	], {force: true}
+	);
+	cb();
+}
 
 // resize images
 function resizeImages(done) {
@@ -183,11 +237,11 @@ function resizeImages(done) {
 					console.log(err);
 				});
 		});
+		
 	});
 	done();
 }
 
 // exports (Common JS)
-module.exports = {
-	resize: resizeImages
-};
+exports.clean = clean;
+exports.resize = resizeImages;

@@ -4,6 +4,7 @@
   "description": "A quick way to resized images",
   "main": "gulpfile.js",
   "dependencies": {
+    "del": "^6.0.0",
     "glob": "^7.1.6",
     "gulp": "^4.0.2",
     "sharp": "^0.27.2"
